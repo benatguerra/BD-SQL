@@ -1,3 +1,4 @@
+--Aqui inserto en las tablas los datos
 INSERT INTO dbo.MEDICOS (Codigo_Identificacion,Nombre_del_Medico,Apellidos_del_Medico,Especialidad,Fecha_de_ingreso,Cargo,Numero_de_Colegiado,Observaciones)
 VALUES ('AJH','Antonio','Jaén Hernández','Pediatria','12-08-82','Adjunto',2113,'Esta proxima su retirada'),('CEM','Carmen','Esteril Manrique','Psiquiatria','13-02-92','Jefe de seccion',1231,'')
 ,('RLQ','Rocio','Lopez Quijada','Medico de familia','23-09-94','Titular',1331,'');
@@ -14,6 +15,8 @@ VALUES(1,'10203-F','23/01/2009','AJH',5,121,'No','Epileptico')
 ,(3,'11454-L','25/05/2009','RLQ',3,31,'No','')
 ,(4,'15413-L','29/01/2010','CEM',2,13,'No','')
 ,(5,'14546-E','24/02/2010','AJH',1,5,'Si','Alergico al Paidoterin')
+
+--Las consultas
 
 SELECT Nombre_del_Medico,Fecha_de_ingreso FROM dbo.MEDICOS
 WHERE Especialidad = 'Pediatria'
@@ -34,7 +37,9 @@ INNER JOIN dbo.INGRESOS AS I ON P.Numero_de_Historial = I.Numero_de_Historial
 INNER JOIN dbo.MEDICOS AS M ON M.Codigo_Identificacion = I.Codigo_de_Identificacion
 WHERE M.Nombre_del_Medico = 'Antonio'
 
-Alter PROCEDURE IntroducirMedicos
+--Los procedimientos
+
+CREATE PROCEDURE IntroducirMedicos
 @Codigoidentificacion varchar(4),
 @NombredeMedico varchar(15),
 @ApellidosdeMedico varchar(30),
@@ -80,7 +85,7 @@ END
 
 EXECUTE IntroducirMedicos 'BGM','Beñat','Guerra Manterola','Pediatria','08-05-2020','Auxiliar',1001,''
 
-Alter PROCEDURE MostarDatos
+CREATE PROCEDURE MostarDatos
 @p_FechaInicio Date,
 @p_FechaFinal Date
 
@@ -92,6 +97,8 @@ BEGIN
 END
 
 EXECUTE MostarDatos '01/01/2009','01/02/2009'
+
+--Las funciones
 
 CREATE FUNCTION ContarPacientes(@pacientes tinyint)
 returns int
